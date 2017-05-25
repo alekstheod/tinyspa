@@ -20,7 +20,7 @@ class Graph {
         m_calcWeight = weightFunc;
     }
 
-    int weight (const Node& from, const Node& to) {
+    Weight weight (const Node& from, const Node& to) {
         return m_calcWeight (from, to);
     }
 

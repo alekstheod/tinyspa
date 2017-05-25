@@ -4,6 +4,7 @@ Small abstract  header only shortest path lib
 Usage:
 
 Create given a graph
+```
 #include <ShortestPath.h>
 #include <Queue.h>
 #include <vector>
@@ -47,8 +48,12 @@ class Graph {
                         {3, {8, 9, 10, 11, 4, 2}},
                         {4, {13, 14, 15, 16}}};
 };
+```
 
+Calculate the route
+```
 Spa::ShortestPath< Graph, Spa::PrioQueue > algo (graph);
 const auto spanningTree = algo.calculate (1);
 const auto path = spanningTree.calculate(16);
 const auto path2 = spanningTree.calculate(10);
+```

@@ -100,24 +100,22 @@ SCENARIO ("Testing belman-fords algorithm", "[spa_bellmanford]") {
         }
     }
 
-    GIVEN ("A graph with negative weights, belman-fords algorithm and a start "
+    GIVEN ("A graph ,the belman-fords algorithm and a start "
            "position equal with 1") {
         using GraphMap = Graph::GraphMap;
         GraphMap graphMap = {{1, {2, 3}},
                              {2, {5, 6, 7, 3, 4}},
-                             {3, {8, 9, 10, 11, 4, 2}},
+                             {3, {8, 9, 10, 11}},
                              {4, {13, 14, 15, 16}}};
 
-        auto calcWeight = [](const Node& a, const Node& b) {
-            return a == 3 && b == 2 ? -300 : 100;
-        };
+        auto calcWeight = [](const Node& a, const Node& b) { return 100; };
         Graph graph (calcWeight);
         graph.m_graph = graphMap;
         Spa::ShortestPath< Graph, Spa::Queue > algo (graph);
         const auto spanningTree = algo.calculate (1);
         WHEN ("The destination is 1 and the start position is 16") {
             THEN ("The route should be: 16 -> 4 -> 3 -> 1") {
-                const std::vector< unsigned int > expected = {16, 4, 3, 1};
+                const std::vector< unsigned int > expected = {16, 4, 2, 1};
                 REQUIRE (spanningTree.calculate (16) == expected);
             }
         }

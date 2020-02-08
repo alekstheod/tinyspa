@@ -53,4 +53,4 @@ namespace Spa {
         Queue< Node, Weight > m_queue;
         Graph& m_graph;
     };
-}
+} // namespace Spa

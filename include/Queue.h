@@ -11,9 +11,10 @@ namespace Spa {
             QItem (const Node& node, Weight l) : node (node), label (l) {
             }
 
-            QItem& operator= (const QItem& other) {
+            const QItem& operator= (const QItem& other) {
                 const_cast< Node& > (node) = other.node;
                 const_cast< Weight& > (label) = other.label;
+                return *this;
             }
 
             bool operator< (const QItem& other) const {
@@ -57,7 +58,7 @@ namespace Spa {
             private:
             QueueType m_queue;
         };
-    }
+    } // namespace detail
 
     template < typename Node, typename Weight >
     using PrioQueue =
@@ -65,4 +66,4 @@ namespace Spa {
 
     template < typename Node, typename Weight >
     using Queue = detail::Queue< Node, std::queue< detail::QItem< Node, Weight > > >;
-}
+} // namespace Spa

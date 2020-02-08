@@ -9,34 +9,35 @@
 typedef unsigned int Node;
 
 class Graph {
-    public:
+  public:
     using Node = ::Node;
     using Weight = unsigned int;
     using WeightFunction = std::function< int(const Node&, const Node&) >;
-    Graph () : Graph ([](const Node&, const Node&) { return 100; }) {
+    Graph() : Graph([](const Node&, const Node&) { return 100; }) {
     }
 
-    template < typename WeightFunc > Graph (WeightFunc weightFunc) {
+    template< typename WeightFunc >
+    Graph(WeightFunc weightFunc) {
         m_calcWeight = weightFunc;
     }
 
-    Weight weight (const Node& from, const Node& to) {
-        return m_calcWeight (from, to);
+    Weight weight(const Node& from, const Node& to) {
+        return m_calcWeight(from, to);
     }
 
     using Container = typename std::vector< Node >;
     using Iterator = typename Container::const_iterator;
 
-    Iterator begin (const Node& node) {
-        return m_graph[node].cbegin ();
+    Iterator begin(const Node& node) {
+        return m_graph[node].cbegin();
     }
 
-    Iterator end (const Node& node) {
-        return m_graph[node].cend ();
+    Iterator end(const Node& node) {
+        return m_graph[node].cend();
     }
 
     // In case of dijkstra return true if cur == m_dest
-    bool goal (const Node& cur) {
+    bool goal(const Node& cur) {
         return false;
     }
 
@@ -45,9 +46,8 @@ class Graph {
     WeightFunction m_calcWeight;
 };
 
-
-SCENARIO ("Testing dijkstra algorithm", "[spa_dijkstra]") {
-    GIVEN ("A graph a dijkstras algorithm and a start position equal with 1") {
+SCENARIO("Testing dijkstra algorithm", "[spa_dijkstra]") {
+    GIVEN("A graph a dijkstras algorithm and a start position equal with 1") {
         using GraphMap = Graph::GraphMap;
         GraphMap graphMap = {{1, {2, 3}},
                              {2, {5, 6, 7, 3}},
@@ -56,26 +56,25 @@ SCENARIO ("Testing dijkstra algorithm", "[spa_dijkstra]") {
 
         Graph graph;
         graph.m_graph = graphMap;
-        Spa::ShortestPath< Graph, Spa::PrioQueue > algo (graph);
-        const auto spanningTree = algo.calculate (1);
-        WHEN ("The destination is 1 and the start position is 16") {
-            THEN ("The route should be: 16 -> 4 -> 3 -> 1") {
+        Spa::ShortestPath< Graph, Spa::PrioQueue > algo(graph);
+        const auto spanningTree = algo.calculate(1);
+        WHEN("The destination is 1 and the start position is 16") {
+            THEN("The route should be: 16 -> 4 -> 3 -> 1") {
                 const std::vector< unsigned int > expected = {16, 4, 3, 1};
-                REQUIRE (spanningTree.calculate (16) == expected);
+                REQUIRE(spanningTree.calculate(16) == expected);
             }
         }
-        WHEN ("The destination is 1 and the start position is 10") {
-            THEN ("The route should be 10 -> 3 -> 1") {
+        WHEN("The destination is 1 and the start position is 10") {
+            THEN("The route should be 10 -> 3 -> 1") {
                 const std::vector< unsigned int > expected = {10, 3, 1};
-                REQUIRE (spanningTree.calculate (10) == expected);
+                REQUIRE(spanningTree.calculate(10) == expected);
             }
         }
     }
 }
 
-SCENARIO ("Testing belman-fords algorithm", "[spa_bellmanford]") {
-    GIVEN (
-     "A graph, belman-fords algorithm and a start position equal with 1") {
+SCENARIO("Testing belman-fords algorithm", "[spa_bellmanford]") {
+    GIVEN("A graph, belman-fords algorithm and a start position equal with 1") {
         using GraphMap = Graph::GraphMap;
         GraphMap graphMap = {{1, {2, 3}},
                              {2, {5, 6, 7, 3}},
@@ -84,24 +83,25 @@ SCENARIO ("Testing belman-fords algorithm", "[spa_bellmanford]") {
 
         Graph graph;
         graph.m_graph = graphMap;
-        Spa::ShortestPath< Graph, Spa::Queue > algo (graph);
-        const auto spanningTree = algo.calculate (1);
-        WHEN ("The destination is 1 and the start position is 16") {
-            THEN ("The route should be: 16 -> 4 -> 3 -> 1") {
+        Spa::ShortestPath< Graph, Spa::Queue > algo(graph);
+        const auto spanningTree = algo.calculate(1);
+        WHEN("The destination is 1 and the start position is 16") {
+            THEN("The route should be: 16 -> 4 -> 3 -> 1") {
                 const std::vector< unsigned int > expected = {16, 4, 3, 1};
-                REQUIRE (spanningTree.calculate (16) == expected);
+                REQUIRE(spanningTree.calculate(16) == expected);
             }
         }
-        WHEN ("The destination is 1 and the start position is 10") {
-            THEN ("The route should be 10 -> 3 -> 1") {
+        WHEN("The destination is 1 and the start position is 10") {
+            THEN("The route should be 10 -> 3 -> 1") {
                 const std::vector< unsigned int > expected = {10, 3, 1};
-                REQUIRE (spanningTree.calculate (10) == expected);
+                REQUIRE(spanningTree.calculate(10) == expected);
             }
         }
     }
 
-    GIVEN ("A graph ,the belman-fords algorithm and a start "
-           "position equal with 1") {
+    GIVEN(
+     "A graph ,the belman-fords algorithm and a start "
+     "position equal with 1") {
         using GraphMap = Graph::GraphMap;
         GraphMap graphMap = {{1, {2, 3}},
                              {2, {5, 6, 7, 3, 4}},
@@ -109,20 +109,20 @@ SCENARIO ("Testing belman-fords algorithm", "[spa_bellmanford]") {
                              {4, {13, 14, 15, 16}}};
 
         auto calcWeight = [](const Node& a, const Node& b) { return 100; };
-        Graph graph (calcWeight);
+        Graph graph(calcWeight);
         graph.m_graph = graphMap;
-        Spa::ShortestPath< Graph, Spa::Queue > algo (graph);
-        const auto spanningTree = algo.calculate (1);
-        WHEN ("The destination is 1 and the start position is 16") {
-            THEN ("The route should be: 16 -> 4 -> 3 -> 1") {
+        Spa::ShortestPath< Graph, Spa::Queue > algo(graph);
+        const auto spanningTree = algo.calculate(1);
+        WHEN("The destination is 1 and the start position is 16") {
+            THEN("The route should be: 16 -> 4 -> 3 -> 1") {
                 const std::vector< unsigned int > expected = {16, 4, 2, 1};
-                REQUIRE (spanningTree.calculate (16) == expected);
+                REQUIRE(spanningTree.calculate(16) == expected);
             }
         }
-        WHEN ("The destination is 1 and the start position is 10") {
-            THEN ("The route should be 10 -> 3 -> 1") {
+        WHEN("The destination is 1 and the start position is 10") {
+            THEN("The route should be 10 -> 3 -> 1") {
                 const std::vector< unsigned int > expected = {10, 3, 1};
-                REQUIRE (spanningTree.calculate (10) == expected);
+                REQUIRE(spanningTree.calculate(10) == expected);
             }
         }
     }

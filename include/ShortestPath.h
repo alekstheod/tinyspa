@@ -20,10 +20,10 @@ namespace Spa {
 
         SpanningTree< Node, Weight > calculate(const Node& dest) {
             m_queue.push(Item(dest, 0));
+            m_labels[dest].label = 0;
             while(!m_queue.empty() && !m_graph.goal(m_queue.top().node)) {
                 Item cur = m_queue.top();
                 m_queue.pop();
-                m_labels[dest].label = 0;
                 using namespace std::placeholders;
                 std::for_each(m_graph.begin(cur.node),
                               m_graph.end(cur.node),

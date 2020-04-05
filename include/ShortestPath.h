@@ -22,12 +22,12 @@ namespace Spa {
             m_queue.push(Item(dest, 0));
             m_labels[dest].label = 0;
             while(!m_queue.empty() && !m_graph.goal(m_queue.top().node)) {
-                Item cur = m_queue.top();
+                Item currentNode = m_queue.top();
                 m_queue.pop();
                 using namespace std::placeholders;
-                std::for_each(m_graph.begin(cur.node),
-                              m_graph.end(cur.node),
-                              std::bind(&ShortestPath::enque, this, cur.node, _1));
+                std::for_each(m_graph.begin(currentNode.node),
+                              m_graph.end(currentNode.node),
+                              std::bind(&ShortestPath::enque, this, currentNode.node, _1));
             }
 
             m_queue.clear();
@@ -35,15 +35,15 @@ namespace Spa {
         }
 
       private:
-        void enque(const Node& cur, const Node& child) {
-            auto label = m_labels[cur].label + m_graph.weight(cur, child);
+        void enque(const Node& currentNode, const Node& child) {
+            auto label = m_labels[currentNode].label + m_graph.weight(currentNode, child);
 
-            Label entry(child, label);
+            Label newLabel(child, label);
             auto& predLabel = m_labels[child];
-            if(predLabel.label > entry.label) {
+            if(predLabel.label > newLabel.label) {
                 m_queue.push(Item(child, label));
-                predLabel = entry;
-                predLabel.pred = cur;
+                predLabel = newLabel;
+                predLabel.pred = currentNode;
             }
         }
 

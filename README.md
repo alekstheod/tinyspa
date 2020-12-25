@@ -3,7 +3,7 @@ Small abstract  header only shortest path lib
 
 Usage:
 
-Create given a graph
+Create a graph
 ```
 #include <ShortestPath.h>
 #include <Queue.h>

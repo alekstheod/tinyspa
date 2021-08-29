@@ -17,11 +17,12 @@ namespace Spa {
                 const_cast< Weight& >(label) = other.label;
                 return *this;
             }
-
-            bool operator<(const QItem& other) const {
-                return label > other.label;
-            }
         };
+
+        template< typename T, typename T2 >
+        bool operator<(const QItem< T, T2 >& lhs, const QItem< T, T2 >& rhs) {
+            return lhs.label > rhs.label;
+        }
 
         template< typename ItemType >
         const ItemType& top(const std::queue< ItemType >& q) {

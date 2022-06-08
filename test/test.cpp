@@ -4,7 +4,7 @@
 #include <unordered_map>
 
 #define CATCH_CONFIG_MAIN
-#include "catch.hpp"
+#include <catch2/catch.hpp>
 
 typedef unsigned int Node;
 

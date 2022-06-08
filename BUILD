@@ -11,5 +11,8 @@ cc_test(
         "test/**/*.cpp",
         "test/**/*.hpp",
     ]),
-    deps = [":tinyspa"],
+    deps = [
+        ":tinyspa",
+        "@catch2",
+    ],
 )

@@ -1,17 +1,17 @@
 # tinyspa
-Small abstract  header only shortest path lib
+
+Small abstract header only shortest path lib
 
 Usage:
 
 Create a graph
+
 ```
 #include <ShortestPath.h>
 #include <Queue.h>
+
 #include <vector>
 #include <unordered_map>
-
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
 
 typedef unsigned int Node;
 
@@ -51,6 +51,7 @@ class Graph {
 ```
 
 Calculate the route
+
 ```
 Spa::ShortestPath< Graph, Spa::PrioQueue > algo (graph);
 const auto spanningTree = algo.calculate (1);

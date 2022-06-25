@@ -1,7 +1,11 @@
+queue_rules:
+  - name: default
+    conditions: []
+
 pull_request_rules:
-  - name: Automatic merge on check
+  - name: merge using the merge queue
     conditions:
-      - "#approved-reviews-by>=0"
+      - check-success=ci/circleci:build
     actions:
-      merge:
-        method: merge
+      queue:
+        name: default

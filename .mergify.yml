@@ -1,6 +1,6 @@
 queue_rules:
   - name: default
-    conditions: []
+    conditions: [] 
 
 pull_request_rules:
   - name: merge using the merge queue

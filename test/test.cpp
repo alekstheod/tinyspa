@@ -1,10 +1,11 @@
 #include <ShortestPath.h>
 #include <Queue.h>
-#include <vector>
-#include <unordered_map>
 
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
+
+#include <vector>
+#include <unordered_map>
 
 typedef unsigned int Node;
 

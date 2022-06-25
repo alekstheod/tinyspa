@@ -6,6 +6,16 @@ or AStar algorithm
 
 Usage:
 
+Define a graph class
+
+- Graph is a class with the following interface
+  - Node type defines the node
+  - Weight type defines the weight
+  - Weight weight(const Node& from, const Node& to) // calculates the weight for the edge between the nodes from and to
+  - Iterator begin(const Node& node) // returns iterator of of predecessors of the given node
+  - Iterator end(const Node& node) // returns end iterator of predecessors of the given node
+  - bool goal (const Node& cur) // returns true if the goal is reached (destination == cur)
+
 Create a graph
 
 ```

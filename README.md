@@ -1,6 +1,8 @@
 # tinyspa
 
-Small abstract header only shortest path lib
+Small header only shortest path algorithm implementation
+by adapting the weight function can be used as a dijkstra
+or AStar algorithm
 
 Usage:
 

@@ -1,11 +1,10 @@
-queue_rules:
-  - name: default
-    conditions: [] 
-
 pull_request_rules:
-  - name: merge using the merge queue
+  - name: automerge to master with label automerge
     conditions:
-      - "check-success=ci/circleci: build"
+      - base=master
+      - label=automerge
+      - label!=WIP
+      - "status-success=ci/circleci: build"
     actions:
-      queue:
-        name: default
+      merge:
+        method: merge

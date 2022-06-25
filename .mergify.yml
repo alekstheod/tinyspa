@@ -2,7 +2,6 @@ pull_request_rules:
   - name: automerge to master with label automerge
     conditions:
       - base=master
-      - label=automerge
       - label!=WIP
       - "status-success=ci/circleci: build"
     actions:

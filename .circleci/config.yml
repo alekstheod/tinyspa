@@ -1,5 +1,5 @@
 jobs:
-  check:
+  build:
     docker:
       - image: l.gcr.io/google/bazel:latest
     steps:

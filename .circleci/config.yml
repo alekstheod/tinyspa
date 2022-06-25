@@ -1,0 +1,9 @@
+jobs:
+  build:
+    docker:
+      - image: l.gcr.io/google/bazel:latest
+    steps:
+      - checkout
+      - run: bazel build --config=asan //...
+      - run: bazel test --config=asan //...
+version: 2
